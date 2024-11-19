@@ -34,7 +34,7 @@ public class RoomPanel : MonoBehaviour
     // Start Button
     public void StartGame(string sceneName)
     {
-        PhotonNetwork.LoadLevel($"{sceneName}");
+        GameManager.Scene.LoadScene($"{sceneName}");
     }
 
     // Leave Button
@@ -50,7 +50,7 @@ public class RoomPanel : MonoBehaviour
         // 전체 플레이어의 레디 상황 확인
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if (player.GetReady())
+            if (player.GetReady_InLobby())
                 readyCount++;
         }
 

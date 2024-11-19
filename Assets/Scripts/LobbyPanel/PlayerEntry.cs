@@ -18,22 +18,21 @@ public class PlayerEntry : MonoBehaviour
         this.player = player;
         outlineImage.color = Color.black;
 
-        if(PhotonNetwork.IsMasterClient)
+        if(player.IsMasterClient)
             outlineImage.color = Color.green;
-
-        if(player == PhotonNetwork.LocalPlayer)
+        else if(player.IsLocal)
             playerName.text = $"<b><color=#ff3333>{player.NickName}</color></b>";
         else
             playerName.text = player.NickName;
 
-        playerReady.text = player.GetReady() ? "Ready" : "";    // Ready가 되어있었으면 Ready, 아니면 비어있음
+        playerReady.text = player.GetReady_InLobby() ? "Ready" : "";    // Ready가 되어있었으면 Ready, 아니면 비어있음
         playerReadyButton.gameObject.SetActive(player.IsLocal);
     }
 
     public void Ready()
     {
-        bool ready = player.GetReady();
+        bool ready = player.GetReady_InLobby();
         ready = !ready; // 반대 상황 만들어주기
-        player.SetReady(ready);
+        player.SetReady_InLobby(ready);
     }
 }
