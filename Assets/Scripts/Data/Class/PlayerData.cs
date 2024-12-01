@@ -1,9 +1,13 @@
+using System.Collections.Generic;
 using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerData
 {
     public int PlayerID { get; set; }
     public string Nickname { get; set; }
+    public List<Card> cardList = new List<Card>(); // Player가 가지고 있는 Card List
+    
+    
 
     /// <summary>
     /// Return Photon Hashtable

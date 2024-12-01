@@ -9,13 +9,18 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player Data")]
     [SerializeField] private PlayerData currentPlayerData;
-    [SerializeField] private float m_PlayerMoveSpeed;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float mouseSensitivity = 100f;
 
     [Header("Input System And Move Controller")]
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private PlayerMove moveController;
+    
+    [Header("Additional Player Controller")]
     [SerializeField] private PlayerCamera cameraController;
 
+    [SerializeField] private PlayerHUD playerHUD;
+    
     private void Awake()
     {
         OnInitComponents();     // Components 초기화
@@ -25,20 +30,26 @@ public class PlayerController : MonoBehaviour
 
     private void OnInitComponents()
     {
+        pv = GetComponent<PhotonView>();
         moveController = GetComponent<PlayerMove>();
         playerInput = GetComponent<PlayerInput>();
-        pv = GetComponent<PhotonView>();
     }
 
     private void PlayerSettings()
     {
         PlayerMoveSetting();
+        PlayerCameraSetting();
         PlayerInputSetting();
     }
 
     private void PlayerMoveSetting()
     {
-        moveController.SetMoveSpeed(m_PlayerMoveSpeed);
+        moveController.SetMoveSpeed(moveSpeed);
+    }
+
+    private void PlayerCameraSetting()
+    {
+        cameraController.SetMouseSetting(mouseSensitivity);
     }
 
     private void PlayerInputSetting()
@@ -52,5 +63,4 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
 }

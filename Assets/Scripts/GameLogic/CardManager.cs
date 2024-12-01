@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 /// <summary>
@@ -5,5 +6,16 @@ using UnityEngine;
 /// </summary>
 public class CardManager : MonoBehaviour
 {
+    public void GetCardRPC(int cardIndex)
+    {
+        GetCard(cardIndex);
+    }
     
+    /// <summary>
+    /// master client set cardIndex, Local Player Get Card 
+    /// </summary>
+    public void GetCard(int cardIndex)
+    {
+        
+    }
 }

@@ -4,7 +4,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMove : MonoBehaviour, IPunObservable
+public class PlayerMove : MonoBehaviour
 {
     private Rigidbody rb;
     private PhotonView pv;
@@ -24,13 +24,18 @@ public class PlayerMove : MonoBehaviour, IPunObservable
     {
         if (pv.IsMine)
         {
-            rb.MovePosition(rb.position + m_moveSpeed * Time.fixedDeltaTime * moveDir.normalized);
+            Move();
         }
     }
 
-    public void SetMoveSpeed(float moveSpeed)
+    public void SetMoveSpeed(float _moveSpeed)
     {
-        m_moveSpeed = moveSpeed;
+        m_moveSpeed = _moveSpeed;
+    }
+
+    private void Move()
+    {
+        rb.MovePosition(rb.position + m_moveSpeed * Time.fixedDeltaTime * moveDir);
     }
 
     private void OnMove(InputValue value)
@@ -38,19 +43,7 @@ public class PlayerMove : MonoBehaviour, IPunObservable
         if (pv.IsMine && value != null)
         {
             Vector2 inputDir = value.Get<Vector2>();
-            moveDir = new Vector3(inputDir.x, 0, inputDir.y);
+            moveDir = transform.TransformDirection(new Vector3(inputDir.x, 0, inputDir.y).normalized);
         }
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        // if (stream.IsWriting)
-        // {
-        //     stream.SendNext(moveDir);
-        // }
-        // else
-        // {
-        //     moveDir = (Vector3)stream.ReceiveNext();
-        // }
     }
 }

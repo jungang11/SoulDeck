@@ -144,7 +144,8 @@ public class GameSceneManager : MonoBehaviourPunCallbacks
         float x = 5.0f * Mathf.Sin(angularStart * Mathf.Deg2Rad);
         float z = 5.0f * Mathf.Cos(angularStart * Mathf.Deg2Rad);
 
-        Vector3 playerSpawnPosition = new Vector3(x, 0f, z);
+        // Vector3 playerSpawnPosition = new Vector3(x, 0f, z);
+        Vector3 playerSpawnPosition = new Vector3(0f, 0f, 0f);
         Quaternion playerSpawnRotation = Quaternion.Euler(0.0f, angularStart, 0.0f);
 
         return (playerSpawnPosition, playerSpawnRotation);
