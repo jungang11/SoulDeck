@@ -87,15 +87,5 @@ public static class CustomPropertyExtension
         property["PlayerID"] = playerID;
         player.SetCustomProperties(property);
     }
-
-    public static void SetPlayerData(this Player player, PlayerData data)
-    {
-        player.SetCustomProperties(data.ToHashtable());
-    }
-
-    public static PlayerData GetPlayerData(this Player player)
-    {
-        return PlayerData.FromHashtable(player.CustomProperties);
-    }
 #endregion
 }

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -20,17 +21,26 @@ public class GameManager : MonoBehaviour
     public static SceneChangeManager Scene => sceneManager;
     public static NetworkManager Network => networkManager;
 
+    public PhotonView photonView;
+
     private void Awake()
     {
-        if(instance != null)
+        if (instance == null)
         {
-            Destroy(this);
-            return;
+            instance = this;
         }
-
-        instance = this;
+        else if (instance != this)
+        {
+            // Instance가 이미 다른 객체로 설정되어 있다면, 중복 GameManager 제거
+            Destroy(this.gameObject);
+        }
+        
         DontDestroyOnLoad(this);
         InitManagers();
+
+        photonView = GetComponent<PhotonView>();
+        if (photonView != null && photonView.ViewID != 990)
+            photonView.ViewID = 990;
     }
 
     private void OnDestroy()

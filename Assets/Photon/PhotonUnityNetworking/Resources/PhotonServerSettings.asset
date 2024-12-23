@@ -45,6 +45,16 @@ MonoBehaviour:
   - CreateSharedObjectRPC
   - RequestObjectCreation
   - RequestObjectRemove
+  - GetCardAllPlayer_RPC
+  - SubmitCard_RPC
+  - AddPlayer_RPC
+  - TestState_RPC
+  - SyncPlayerCards
+  - RejectCard
+  - UpdateCardState
+  - CheckSubmitCard_RPC
+  - GameOver_RPC
+  - GameWin_RPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

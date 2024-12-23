@@ -13,6 +13,9 @@ public class PlayerCamera : MonoBehaviour
     private Vector2 lookDelta;
     private float xRotation; // 상하 회전값
     private float yRotation; // 좌우 회전값
+
+    private bool isLooking = false;
+    public bool IsLooking { get { return isLooking; } set { isLooking = value; } }
     
     private void Awake()
     {
@@ -31,13 +34,21 @@ public class PlayerCamera : MonoBehaviour
     private void OnEnable()
     {
         if (pv.IsMine)
-            Cursor.lockState = CursorLockMode.Locked;
+        {
+            IsLooking = true;
+            SetLockState(CursorLockMode.Locked);
+        }
     }
 
     private void OnDisable()
     {
         if (pv.IsMine)
-            Cursor.lockState = CursorLockMode.None;
+            SetLockState(CursorLockMode.None);
+    }
+
+    public void SetLockState(CursorLockMode mode)
+    {
+        Cursor.lockState = mode;
     }
 
     private void LateUpdate()
@@ -68,10 +79,9 @@ public class PlayerCamera : MonoBehaviour
     // pointer - delta 를 이용해 Vector2 값을 받아옴
     private void OnLook(InputValue value)
     {
-        if (value != null)
+        if (value != null && IsLooking)
         {
             lookDelta = value.Get<Vector2>();
-            Debug.Log(lookDelta);
         }
     }
 }

@@ -12,6 +12,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float m_moveSpeed;
     private Vector3 moveDir;
 
+    private bool isMoving = false;
+    public bool IsMoving { get => isMoving; set => isMoving = value; }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -27,7 +30,7 @@ public class PlayerMove : MonoBehaviour
             Move();
         }
     }
-
+    
     public void SetMoveSpeed(float _moveSpeed)
     {
         m_moveSpeed = _moveSpeed;
@@ -40,7 +43,7 @@ public class PlayerMove : MonoBehaviour
 
     private void OnMove(InputValue value)
     {
-        if (pv.IsMine && value != null)
+        if (pv.IsMine && value != null && IsMoving)
         {
             Vector2 inputDir = value.Get<Vector2>();
             moveDir = transform.TransformDirection(new Vector3(inputDir.x, 0, inputDir.y).normalized);

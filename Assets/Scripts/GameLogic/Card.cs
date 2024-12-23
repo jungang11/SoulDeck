@@ -7,8 +7,7 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
-    public CardData cardData;
-    public int currentCardIndex;
+    public int currentCardIndex;    // 카드 숫자
 
     public Image cardBackImage;
     public Image cardFrontImage;
@@ -64,7 +63,6 @@ public class Card : MonoBehaviour
     /// </summary>
     public void SetCardFront()
     {
-        LogApi.Log("Set Card Front");
         cardTransform.DORotate(frontVector, 1.5f, RotateMode.FastBeyond360);
     }
 
@@ -73,7 +71,6 @@ public class Card : MonoBehaviour
     /// </summary>
     public void SetCardBack()
     {
-        LogApi.Log("Set Card Back");
         cardTransform.DORotate(backVector, 1.5f, RotateMode.FastBeyond360);
     }
 }
